@@ -1,0 +1,231 @@
+/* =========================
+   EINFACHE VARIABLEN (änderbar!)
+   ========================= */
+:root{
+  /* Grundfarben */
+  --text:#252525;
+  --muted:#666;
+  --bg:#f8f6f9;
+  --paper:#ffffff;
+
+  /* Markenfarben (Hero) */
+  --brand-1:#983da8;   /* Lila */
+  --brand-2:#c39634;   /* Rosa */
+  --brand-3:#19e520;   /* Gelb */
+
+  /* Strichel/Fokusfarben */
+  --dash:#ba9fe2;      /* Strichelrosa */
+  --dash-soft:#e9e2ff; /* zartes Violett */
+  --dash-dark: #d0c6fe; /* Strichelviolett */
+  --underline:#71c5d5; /* Unterstreichung Überschriften */
+
+  /* CTA (Button) */
+  --cta-bg:#965dff;    /* Vollton */
+  --cta-text:#ffffff;
+  --cta-hover:#641cb6;
+
+  /* Ecken & Schatten */
+  --r-lg:18px;
+  --r-md:12px;
+  --shadow:0 12px 36px rgba(0,0,0,.08);
+}
+
+/* =========================
+   GRUNDLAYOUT
+   ========================= */
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(60vmax 60vmax at -10% -10%, #fff0fa 0%, transparent 60%),
+    radial-gradient(50vmax 50vmax at 110% -10%, #f2efff 0%, transparent 60%),
+    var(--bg);
+  line-height:1.65;
+}
+
+.container{ width:min(100% - 2rem, 1000px); margin-inline:auto; }
+.section{ padding:3.5rem 0; }
+
+/* Überschriften ohne Gradient, mit Unterstreichung */
+.section-title{
+  position:relative;
+  display:inline-block;
+  margin:0 0 .9rem 0;
+  font-size:clamp(1.6rem, 3vw, 2.2rem);
+  color:var(--text);
+}
+.section-title::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-6px; height:8px;
+  border-radius:6px; background:var(--underline);
+}
+.lead{ color:var(--muted); max-width:60ch; }
+
+/* kleiner „Tadaa“-Akzent beim Anker-Sprung */
+.section:target .section-title{ animation:tadaa .6s ease both; }
+@keyframes tadaa{ 0%{transform:scale(1)} 40%{transform:scale(1.03)} 100%{transform:scale(1)} }
+
+/* =========================
+   SKIP-LINK
+   ========================= */
+.skip-link{
+  position:absolute; left:-9999px; top:0;
+  background:#000; color:#fff; padding:.6rem .8rem; border-radius:.6rem;
+}
+.skip-link:focus{ left:.5rem; z-index:1000; }
+
+/* =========================
+   HERO (bunter Streifen im Kopfteil)
+   ========================= */
+.hero{ position:relative; text-align:center; padding:5.5rem 0 4rem; }
+.hero::before{
+  content:""; position:absolute; inset:0; left:50%; right:50%;
+  margin-left:-50vw; margin-right:-50vw; width:100vw; z-index:-1;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 40%),
+    linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+  background-size:200% 100%;
+  animation:heroShift 14s ease-in-out infinite;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.06);
+}
+@keyframes heroShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.hero-inner{ width:min(100% - 2rem, 980px); margin-inline:auto; }
+
+.kicker{
+  margin:0; letter-spacing:.06em; text-transform:uppercase; font-weight:700;
+  color:rgba(255, 255, 255, 0.85);
+}
+.hero h1{
+  margin:.2rem 0 .5rem 0; font-size:clamp(2.2rem, 6vw, 3.2rem); line-height:1.15; color:#fff;
+}
+.wave{ display:inline-block; }
+.sub{
+  color:rgba(255,255,255,.95); background:rgba(255,255,255,.18);
+  display:inline-block; padding:.35rem .65rem; border-radius:.6rem;
+}
+
+/* =========================
+   NAVIGATION IM HERO
+   ========================= */
+.hero-nav{
+  margin:1.2rem auto 1.8rem;
+  display:flex; flex-wrap:wrap; gap:.7rem; justify-content:center;
+}
+.pill{
+  font-weight: 800;
+  text-decoration:none; color:var(--text); background:#fff;
+  border:2px dashed var(--dash); border-radius:999px; padding:.55rem 1rem;
+  box-shadow: var(--shadow);
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+.pill:hover,.pill:focus{
+  transform: translateY(-1px);
+  border-color: var(--dash-dark); outline:none; box-shadow:0 14px 40px rgba(0,0,0,.12);
+  background: rgb(231, 239, 237);
+}
+
+/* =========================
+   CTA-BUTTON 
+   ========================= */
+.btn{
+  display:inline-block; text-decoration:none; font-weight:800;
+  padding:1rem 1.6rem; border-radius:999px; color:var(--cta-text);
+  background:var(--cta-bg); border:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  animation:ctaPop .7s ease .3s both;
+}
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 26px rgba(0,0,0,.25);
+  background:var(--cta-hover);
+}
+@keyframes ctaPop{ 0%{transform:scale(.9);opacity:0} 60%{transform:scale(1.08);opacity:1} 100%{transform:scale(1)} }
+
+/* =========================
+   STICKER-GALERIE
+   ========================= */
+.sticker-grid{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:1.2rem; margin-top:1.2rem;
+}
+.sticker{
+  background:var(--paper);
+  border:2px dashed var(--dash-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  padding:.6rem .6rem .8rem; text-align:center;
+}
+.sticker img{
+  width:100%; height:230px; object-fit:cover;
+  border-radius: calc(var(--r-lg) - 6px); display:block;
+}
+.sticker figcaption{ margin-top:.45rem; color:var(--muted); font-size:.95rem; }
+.tilt-l{ transform: rotate(-1.2deg); }
+.tilt-r{ transform: rotate(1.2deg); }
+
+/* =========================
+   PILLS (Was ich mag)
+   ========================= */
+.chip-list{
+  list-style:none; padding:0; margin:0; margin-top: 20px;
+  display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:.7rem;
+}
+.chip-list li{
+  background:#fff; border:2px dashed var(--dash);
+  border-radius:999px; padding:.6rem .8rem; text-align:center;
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   KARTEN (Projekte)
+   ========================= */
+.card-grid{
+  display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:1rem; margin-top:1rem;
+}
+.card{
+  background:#aac76b; border:1px solid var(--dash-soft);
+  border-radius: var(--r-lg); padding:1rem; box-shadow: var(--shadow);
+}
+.card h3{ margin:.2rem 0 .4rem 0; font-size:1.15rem; }
+.card p{ margin:0; color:var(--muted); }
+.badge{
+  display:inline-block; margin-top:.6rem;
+  padding:.28rem .6rem; border-radius:999px;
+  background:#f5f1ff; border:1px solid var(--dash-soft); font-size:.85rem;
+}
+
+/* =========================
+   FOOTER & TOP-LINKS
+   ========================= */
+.site-footer{ padding:2rem 0 3rem; text-align:center; color:var(--muted); }
+
+.back-to-top{
+  display:inline-block; text-decoration:none; font-weight:700; margin-top:.6rem;
+  padding:.55rem 1rem; border-radius:999px; color:#2b2b2b;
+  background:#fff; border:2px dashed var(--dash); box-shadow: var(--shadow);
+}
+.back-to-top:hover{ border-color: var(--dash-dark); transform:translateY(-1px); }
+
+/* Fokus – Barrierefreiheit */
+a:focus-visible{ outline:3px solid #000; outline-offset:2px; }
+
+/* =========================
+   RESPONSIV
+   ========================= */
+@media (max-width: 900px){
+  .chip-list{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .card-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .sticker-grid{ grid-template-columns:1fr; }
+  .card-grid{ grid-template-columns:1fr; }
+}
