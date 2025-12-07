@@ -17,7 +17,7 @@
   --dash: #ba9fe2; /* Strichelrosa */
   --dash-soft: #e9e2ff; /* zartes Violett */
   --dash-dark: #d0c6fe; /* Strichelviolett */
-  --underline: #71c5d5; /* Unterstreichung Überschriften */
+  --underline: rgb(140, 181, 214); /* Unterstreichung Überschriften */
 
   /* CTA (Button) */
   --cta-bg: #965dff; /* Vollton */
@@ -59,7 +59,7 @@ body {
   margin-inline: auto;
 }
 .section {
-  padding: 3.5rem 0;
+  padding-top: 4rem;
 }
 
 /* Überschriften ohne Gradient, mit Unterstreichung */
@@ -325,13 +325,24 @@ body {
   padding: 1rem;
   box-shadow: var(--shadow);
 }
+
+.c1 {
+  background: rgb(138, 201, 96);
+}
+
+.c2 {
+  background: rgb(140, 181, 214);
+}
+
+.c3 {
+  background: rgb(228, 137, 53);
+}
 .card h3 {
   margin: 0.2rem 0 0.4rem 0;
   font-size: 1.15rem;
 }
 .card p {
   margin: 0;
-  color: var(--muted);
 }
 .badge {
   display: inline-block;
@@ -365,7 +376,7 @@ body {
   top: 2.5rem;
   left: 0;
   height: 4px;
-  width: 1800px;
+  width: 4300px;
   background: var(--dash);
   border-radius: 3px;
   z-index: 1;
@@ -440,7 +451,7 @@ body {
   color: var(--muted);
 }
 
-/* —————— DOT (perfekt über Linie) —————— */
+/* —————— DOT —————— */
 .timeline-card .dot {
   width: 18px;
   height: 18px;
